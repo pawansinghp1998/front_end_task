@@ -49,6 +49,7 @@ export const productDetails = (state = initialState, action) => {
     case FETCH_PRODUCT_LIST_SUCCESS: {
       return {
         ...state,
+        productDetails: null,
         productItemList: action.payload.productItemList,
       };
     }

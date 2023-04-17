@@ -27,6 +27,7 @@ const ProductList = () => {
     sortingCriteria: null,
   });
 
+  // local state variable to maintain cureent page no
   const [currentPage, setCurrentPage] = useState(1);
   const [configProductList, setConfigProductList] = useState();
 
@@ -45,6 +46,7 @@ const ProductList = () => {
     { label: "Above ₹1499", value: "1499", id: 1500 },
   ];
 
+  //api call to fetch product categories
   useEffect(() => {
     dispatch(fetchProductCategoriesRequest());
   }, []);
@@ -117,6 +119,7 @@ const ProductList = () => {
         );
       }
     }
+    // setting products to items to render upon applying various filters
     setConfigProductList(customProductList);
   }, [filterData, productList]);
 
@@ -131,6 +134,8 @@ const ProductList = () => {
         })
       );
     }
+    //To scroll to top on api call
+    window.scrollTo(0, 0);
   }, [selectedProductCategoryId, currentPage]);
 
   // handle the selected product category and update the local state variable
@@ -220,7 +225,7 @@ const ProductList = () => {
         {configProductList?.length > 0 &&
           configProductList.map((item) => {
             return (
-              <NavLink to="/productId">
+              <NavLink to="/productId" key={item.id}>
                 <div
                   key={item.id}
                   className="product-container"
